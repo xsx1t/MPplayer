@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Movie Player</title>
+<style>
+body {
+background-color: #111;
+color: white;
+font-family: Arial, sans-serif;
+text-align: center;
+padding: 20px;
+}
+
+input {
+width: 60%;
+padding: 10px;
+font-size: 16px;
+border-radius: 8px;
+border: none;
+margin-bottom: 10px;
+}
+
+button {
+padding: 10px 20px;
+font-size: 16px;
+border: none;
+border-radius: 8px;
+background-color: #e50914;
+color: white;
+cursor: pointer;
+}
+
+video {
+margin-top: 20px;
+width: 80%;
+max-width: 900px;
+border-radius: 10px;
+background: black;
+}
+</style>
+</head>
+<body>
+
+<h1>🎬 Movie Player</h1>
+
+<input type="text" id="videoURL" placeholder="Paste direct .mp4 link here">
+<br>
+<button onclick="playVideo()">Play</button>
+
+<br>
+
+<video id="player" controls>
+Your browser does not support video.
+</video>
+
+<script>
+function playVideo() {
+const url = document.getElementById("videoURL").value;
+const player = document.getElementById("player");
+
+if (url.trim() === "") {
+alert("Please enter a video link.");
+return;
+}
+
+player.src = url;
+player.play();
+}
+</script>
+
+</body>
+</html>
