@@ -5,11 +5,15 @@
 <title>Movie Player</title>
 <style>
 body {
-background-color: #111;
+background: #0d0d0d;
 color: white;
 font-family: Arial, sans-serif;
 text-align: center;
 padding: 20px;
+}
+
+h1 {
+margin-bottom: 20px;
 }
 
 input {
@@ -33,8 +37,8 @@ cursor: pointer;
 
 video {
 margin-top: 20px;
-width: 80%;
-max-width: 900px;
+width: 85%;
+max-width: 1000px;
 border-radius: 10px;
 background: black;
 }
@@ -44,13 +48,12 @@ background: black;
 
 <h1>🎬 Movie Player</h1>
 
-<input type="text" id="videoURL" placeholder="Paste direct .mp4 link here">
+<input type="text" id="videoURL" placeholder="Paste .mp4 link here">
 <br>
 <button onclick="playVideo()">Play</button>
 
-<br>
-
-<video id="player" controls>
+<video id="player" controls autoplay>
+<source src="https://dn720400.ca.archive.org/0/items/la-belle-personne/la%20belle%2gm0personne.ia.mp4" type="video/mp4">
 Your browser does not support video.
 </video>
 
@@ -60,7 +63,7 @@ const url = document.getElementById("videoURL").value;
 const player = document.getElementById("player");
 
 if (url.trim() === "") {
-alert("Please enter a video link.");
+alert("Enter a video link first.");
 return;
 }
 
@@ -71,3 +74,4 @@ player.play();
 
 </body>
 </html>
+
