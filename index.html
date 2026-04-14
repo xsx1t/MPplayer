@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Movie Player</title>
+
 <style>
 body {
 background: #0d0d0d;
@@ -13,34 +14,29 @@ padding: 20px;
 }
 
 h1 {
-margin-bottom: 20px;
+margin-bottom: 15px;
 }
 
-input {
-width: 60%;
+input, button {
 padding: 10px;
+margin: 8px;
 font-size: 16px;
 border-radius: 8px;
 border: none;
-margin-bottom: 10px;
 }
 
 button {
-padding: 10px 20px;
-font-size: 16px;
-border: none;
-border-radius: 8px;
-background-color: #e50914;
+background: #e50914;
 color: white;
 cursor: pointer;
 }
 
 video {
-margin-top: 20px;
-width: 85%;
+width: 90%;
 max-width: 1000px;
-border-radius: 10px;
+margin-top: 20px;
 background: black;
+border-radius: 10px;
 }
 </style>
 </head>
@@ -48,30 +44,52 @@ background: black;
 
 <h1>🎬 Movie Player</h1>
 
-<input type="text" id="videoURL" placeholder="Paste .mp4 link here">
-<br>
-<button onclick="playVideo()">Play</button>
+<!-- LINK INPUT -->
+<div>
+<input id="url" placeholder="Paste .mp4 link here">
+<button onclick="loadLink()">Play Link</button>
+</div>
 
-<video id="player" controls autoplay>
-<source src="https://dn720400.ca.archive.org/0/items/la-belle-personne/la%20belle%2gm0personne.ia.mp4" type="video/mp4">
-Your browser does not support video.
-</video>
+<!-- FILE INPUT -->
+<div>
+<input type="file" accept="video/*" onchange="loadFile(event)">
+</div>
+
+<!-- VIDEO PLAYER -->
+<video id="video" controls playsinline></video>
 
 <script>
-function playVideo() {
-const url = document.getElementById("videoURL").value;
-const player = document.getElementById("player");
+const video = document.getElementById("video");
 
-if (url.trim() === "") {
-alert("Enter a video link first.");
+// Load video from link
+function loadLink() {
+const link = document.getElementById("url").value;
+
+if (!link) {
+alert("Paste a link first");
 return;
 }
 
-player.src = url;
-player.play();
+video.src = link;
+video.load();
+video.play();
 }
+
+// Load local file
+function loadFile(event) {
+const file = event.target.files[0];
+
+if (!file) return;
+
+video.src = URL.createObjectURL(file);
+video.play();
+}
+
+// Error handling
+video.onerror = () => {
+alert("Video failed to load. The link might be blocked or invalid.");
+};
 </script>
 
 </body>
 </html>
-
